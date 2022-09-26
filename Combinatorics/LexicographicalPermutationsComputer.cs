@@ -12,7 +12,7 @@ public class LexicographicalPermutationsComputer : IPermutationsComputer
     private IEnumerable<IEnumerable<int>> GenerateLexicographicalPermutations(IEnumerable<int> usedElements, IEnumerable<int> allPossibleElements)
     {
         var lexicographicalPermutations = new List<IEnumerable<int>>();
-        var possibleElementsOnCurrentPosition = allPossibleElements.Where(possibleElement => !usedElements.Any(usedElement => usedElement == possibleElement));
+        var possibleElementsOnCurrentPosition = allPossibleElements.Where(possibleElement => usedElements.All(usedElement => usedElement != possibleElement));
         foreach(var possibleElementOnCurrentPosition in possibleElementsOnCurrentPosition)
         {
             var remainingLexicographicalPermutations = GenerateLexicographicalPermutations(usedElements: usedElements.Concat(new List<int>() {possibleElementOnCurrentPosition}), allPossibleElements);
